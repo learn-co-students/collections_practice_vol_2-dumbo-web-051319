@@ -38,23 +38,30 @@ def remove_non_strings(array)
 end
 
 def count_elements(array)
-  new_obj = {}
-  array.each do |elem|
-    elem.each do |key, value|
-
-
+  array.each do |hash|
+    hash[:count] = 0
+    name = hash[:name]
+    array.each do |new_hash|
+      if new_hash[:name] == name
+        hash[:count] +=1
     end
-  end
-  return new obj
+  end 
+  end.uniq
 end
 
 
-def merge_data(obj1, obj2)
-  array = obj1.concat(obj2)
-  array.each do |element|
-    element.merge
+def merge_data(arr1, arr2)
+  arr2[0].map do |name, prop_hash|
+    new_prop_hash = {}
+    arr1.each do |new_attr_hash|
+      if new_attr_hash[:first_name] == name
+        new_prop_hash = prop_hash.merge(new_attr_hash)
+      end
+    end
+    new_prop_hash
   end
 end
+
 
 def find_cool(array)
   new_array = []
@@ -69,6 +76,30 @@ def find_cool(array)
 end
 
 def organize_schools(object)
-  object.sort_by(key)
+  organized_schools = {}
+  object.each do |school, location_hash|
+    location = location_hash[:location]
+    if organized_schools[location]
+      organized_schools[location] << school
+    else
+      organized_schools[location] = []
+      organized_schools[location] << school
+    end
+  end
+   organized_schools
 end
+
+# def organize_schools(schools)
+#   organized_schools = {}
+#   schools.each do |name, location_hash|
+#     location = location_hash[:location]
+#     if organized_schools[location]
+#       organized_schools[location] << name
+#     else
+#       organized_schools[location] = []
+#       organized_schools[location] << name
+#     end
+#   end
+#   organized_schools
+# end
   #  wordlist.sort_by { |word| word.downcase }
